@@ -15,7 +15,6 @@ helpful to read along.
 # Code source: Brian McFee
 # License: ISC
 
-# sphinx_gallery_thumbnail_number = 5
 
 ###################################
 # Imports
@@ -34,7 +33,7 @@ import librosa
 
 
 #############################
-# First, we'll load in a song 
+# First, we'll load in a song
 y, sr = librosa.load('audio/Karissa_Hobbs_-_09_-_Lets_Go_Fishin.mp3')
 
 
@@ -53,7 +52,6 @@ librosa.display.specshow(C, y_axis='cqt_hz', sr=sr,
                          bins_per_octave=BINS_PER_OCTAVE,
                          x_axis='time')
 plt.tight_layout()
-plt.show()
 
 
 ##########################################################
@@ -65,7 +63,6 @@ Csync = librosa.util.sync(C, beats, aggregate=np.median)
 plt.figure(figsize=(12, 4))
 librosa.display.specshow(Csync, bins_per_octave=12*3, y_axis='cqt_hz')
 plt.tight_layout()
-plt.show()
 
 
 #####################################################################
@@ -78,7 +75,7 @@ R = librosa.segment.recurrence_matrix(Csync, width=3, mode='affinity',
 
 # Enhance diagonals with a median filter (Equation 2)
 df = librosa.segment.timelag_filter(scipy.ndimage.median_filter)
-Rf = df(R, size=(1, 5))
+Rf = df(R, size=(1, 7))
 
 
 ###################################################################
@@ -118,7 +115,6 @@ plt.subplot(1,3,3)
 librosa.display.specshow(A, aspect='equal')
 plt.title('Combined graph')
 plt.tight_layout()
-plt.show()
 
 
 #####################################################
@@ -158,7 +154,6 @@ librosa.display.specshow(X)
 plt.title('Structure components')
 plt.ylabel('Time')
 plt.tight_layout()
-plt.show()
 
 
 
@@ -186,7 +181,6 @@ librosa.display.specshow(np.atleast_2d(seg_ids).T, cmap=colors)
 plt.title('Estimated segments')
 plt.colorbar(ticks=range(k))
 plt.tight_layout()
-plt.show()
 
 
 
@@ -204,9 +198,8 @@ bound_segs = list(seg_ids[bound_beats])
 bound_frames = beats[bound_beats]
 
 # Make sure we cover to the end of the track
-if bound_frames.max() < C.shape[1] - 1:
-    bound_frames = librosa.util.fix_frames(bound_frames, x_max=C.shape[1])
-    bound_segs += [seg_ids[-1]]
+bound_frames = librosa.util.fix_frames(bound_frames, x_max=C.shape[1])
+bound_segs += [seg_ids[-1]]
 
 # And convert to time
 bound_times = librosa.frames_to_time(bound_frames)
@@ -215,6 +208,7 @@ bound_times = librosa.frames_to_time(bound_frames)
 # And plot the final segmentation over original CQT
 
 import matplotlib.patches as patches
+# sphinx_gallery_thumbnail_number = 5
 plt.figure(figsize=(12, 4))
 
 librosa.display.specshow(C, y_axis='cqt_hz', sr=sr,
