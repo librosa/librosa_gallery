@@ -75,18 +75,18 @@ R = librosa.segment.recurrence_matrix(Csync, width=3, mode='affinity',
 
 # Enhance diagonals with a median filter (Equation 2)
 df = librosa.segment.timelag_filter(scipy.ndimage.median_filter)
-Rf = df(R, size=(1, 7))
+Rf = df(R, size=(1, 5))
 
 
 ###################################################################
 # Now let's build the sequence matrix (S_loc) using mfcc-similarity
-# R_path[i, i+] = exp(-|C_i - C_j|^2 / bw)
+#   :math:`R_\text{path}[i, i\pm 1] = \exp(-\|C_i - C_{i\pm 1}\|^2 / \sigma^2)`
 mfcc = librosa.feature.mfcc(y=y, sr=sr)
 Msync = librosa.util.sync(mfcc, beats)
 
 path_distance = np.sum(np.diff(Msync, axis=1)**2, axis=0)
-bw = np.mean(path_distance)
-path_sim = np.exp(-path_distance / bw)
+sigma = np.mean(path_distance)
+path_sim = np.exp(-path_distance / sigma)
 
 R_path = np.diag(path_sim, k=1) + np.diag(path_sim, k=-1)
 
