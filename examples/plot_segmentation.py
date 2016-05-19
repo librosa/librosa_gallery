@@ -27,6 +27,8 @@ from __future__ import print_function
 import numpy as np
 import scipy
 import matplotlib.pyplot as plt
+import matplotlib.style as style
+style.use('seaborn-muted')
 import sklearn.cluster
 
 import librosa
@@ -106,13 +108,13 @@ A = mu * Rf + (1 - mu) * R_path
 # Plot the resulting graphs (Figure 1, left and center)
 plt.figure(figsize=(8, 4))
 plt.subplot(1,3,1)
-librosa.display.specshow(Rf, aspect='equal')
+librosa.display.specshow(Rf, aspect='equal', cmap='inferno_r')
 plt.title('Recurrence similarity')
 plt.subplot(1,3,2)
-librosa.display.specshow(R_path, aspect='equal')
+librosa.display.specshow(R_path, aspect='equal', cmap='inferno_r')
 plt.title('Path similarity')
 plt.subplot(1,3,3)
-librosa.display.specshow(A, aspect='equal')
+librosa.display.specshow(A, aspect='equal', cmap='inferno_r')
 plt.title('Combined graph')
 plt.tight_layout()
 
@@ -146,7 +148,7 @@ X = evecs[:, :k] / Cnorm[:, k-1:k]
 
 plt.figure(figsize=(8, 4))
 plt.subplot(1,2,2)
-librosa.display.specshow(Rf, aspect='equal')
+librosa.display.specshow(Rf, aspect='equal', cmap='inferno_r')
 plt.title('Recurrence matrix')
 
 plt.subplot(1,2,1)
@@ -170,7 +172,7 @@ plt.figure(figsize=(12, 4))
 colors = plt.get_cmap('Paired', k)
 
 plt.subplot(1,3,2)
-librosa.display.specshow(Rf, aspect='equal')
+librosa.display.specshow(Rf, aspect='equal', cmap='inferno_r')
 plt.title('Recurrence matrix')
 plt.subplot(1,3,1)
 librosa.display.specshow(X)

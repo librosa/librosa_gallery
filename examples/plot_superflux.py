@@ -19,6 +19,8 @@ This algorithm improves onset detection accuracy in the presence of vibrato.
 from __future__ import print_function
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.style as style
+style.use('seaborn-muted')
 
 import librosa
 
