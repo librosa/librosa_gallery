@@ -90,7 +90,7 @@ onset_sf = librosa.onset.onset_detect(onset_envelope=odf_sf,
 # does not detect onset events at those points.
 
 
-# sphinx_gallery_thumbnail = 2
+#sphinx_gallery_thumbnail_number = 2
 plt.figure(figsize=(6, 6))
 
 plt.subplot(2,1,2)

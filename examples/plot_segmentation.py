@@ -204,11 +204,13 @@ bound_segs += [seg_ids[-1]]
 # And convert to time
 bound_times = librosa.frames_to_time(bound_frames)
 
-###############################################################
+###################################################
 # And plot the final segmentation over original CQT
 
+
+#sphinx_gallery_thumbnail_number = 5
+
 import matplotlib.patches as patches
-# sphinx_gallery_thumbnail_number = 5
 plt.figure(figsize=(12, 4))
 
 librosa.display.specshow(C, y_axis='cqt_hz', sr=sr,
