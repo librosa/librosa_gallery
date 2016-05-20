@@ -30,7 +30,7 @@ import librosa
 
 #############################################
 # Load an example with vocals.
-y, sr = librosa.load('audio/Cheese_N_Pot-C_-_16_-_The_Raps_Well_Clean_Album_Version.mp3')
+y, sr = librosa.load('audio/Cheese_N_Pot-C_-_16_-_The_Raps_Well_Clean_Album_Version.mp3', duration=120)
 
 
 # And compute the spectrogram magnitude and phase
@@ -99,6 +99,7 @@ S_background = mask_i * S_full
 
 ##########################################
 # Plot the same slice, but separated into its foreground and background
+
 #sphinx_gallery_thumbnail_number = 2
 
 plt.figure(figsize=(12, 8))
