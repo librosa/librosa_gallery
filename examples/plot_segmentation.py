@@ -77,17 +77,18 @@ R = librosa.segment.recurrence_matrix(Csync, width=3, mode='affinity',
 
 # Enhance diagonals with a median filter (Equation 2)
 df = librosa.segment.timelag_filter(scipy.ndimage.median_filter)
-Rf = df(R, size=(1, 5))
+Rf = df(R, size=(1, 7))
 
 
 ###################################################################
 # Now let's build the sequence matrix (S_loc) using mfcc-similarity
 #   :math:`R_\text{path}[i, i\pm 1] = \exp(-\|C_i - C_{i\pm 1}\|^2 / \sigma^2)`
+# Here, we take :math:`\sigma` to be the median distance between successive beats.
 mfcc = librosa.feature.mfcc(y=y, sr=sr)
 Msync = librosa.util.sync(mfcc, beats)
 
 path_distance = np.sum(np.diff(Msync, axis=1)**2, axis=0)
-sigma = np.mean(path_distance)
+sigma = np.median(path_distance)
 path_sim = np.exp(-path_distance / sigma)
 
 R_path = np.diag(path_sim, k=1) + np.diag(path_sim, k=-1)
@@ -187,10 +188,10 @@ plt.tight_layout()
 
 
 ###############################################################
-# Convert the segment ids back to indices of segment boundaries
-bound_beats = np.flatnonzero(seg_ids[1:] != seg_ids[:-1])
+# Locate segment boundaries from the label sequence
+bound_beats = 1 + np.flatnonzero(seg_ids[:-1] != seg_ids[1:])
 
-# Tack on the first beat
+# Count beat 0 as a boundary
 bound_beats = librosa.util.fix_frames(bound_beats, x_min=0)
 
 # Compute the segment label for each boundary
@@ -200,11 +201,9 @@ bound_segs = list(seg_ids[bound_beats])
 bound_frames = beats[bound_beats]
 
 # Make sure we cover to the end of the track
-bound_frames = librosa.util.fix_frames(bound_frames, x_max=C.shape[1])
-bound_segs += [seg_ids[-1]]
-
-# And convert to time
-bound_times = librosa.frames_to_time(bound_frames)
+bound_frames = librosa.util.fix_frames(bound_frames,
+                                       x_min=None,
+                                       x_max=C.shape[1]-1)
 
 ###################################################
 # And plot the final segmentation over original CQT
