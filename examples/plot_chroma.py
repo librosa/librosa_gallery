@@ -5,6 +5,16 @@ Enhanced chroma
 ===============
 
 This notebook demonstrates a variety of techniques for enhancing chroma features.
+
+Beyond the default parameter settings of librosa's chroma functions, we apply the following
+enhancements:
+
+    1. Over-sampling the frequency axis to reduce sensitivity to tuning deviations
+    2. Harmonic-percussive-residual source separation to eliminate transients.
+    3. Nearest-neighbor smoothing to eliminate passing tones and sparse noise.  This is inspired by the
+       recurrence-based smoothing technique of
+       `Cho and Bello, 2011 <http://ismir2011.ismir.net/papers/OS8-4.pdf>`_.
+    4. Local median filtering to suppress remaining discontinuities.
 """
 
 # Code source: Brian McFee
