@@ -21,6 +21,7 @@ import matplotlib.style as style
 style.use('seaborn-muted')
 
 import librosa
+import librosa.display
 
 ########################
 # Load the example clip.

@@ -32,7 +32,7 @@ style.use('seaborn-muted')
 import sklearn.cluster
 
 import librosa
-
+import librosa.display
 
 #############################
 # First, we'll load in a song
@@ -109,13 +109,13 @@ A = mu * Rf + (1 - mu) * R_path
 # Plot the resulting graphs (Figure 1, left and center)
 plt.figure(figsize=(8, 4))
 plt.subplot(1,3,1)
-librosa.display.specshow(Rf, aspect='equal', cmap='inferno_r')
+librosa.display.specshow(Rf, cmap='inferno_r')
 plt.title('Recurrence similarity')
 plt.subplot(1,3,2)
-librosa.display.specshow(R_path, aspect='equal', cmap='inferno_r')
+librosa.display.specshow(R_path, cmap='inferno_r')
 plt.title('Path similarity')
 plt.subplot(1,3,3)
-librosa.display.specshow(A, aspect='equal', cmap='inferno_r')
+librosa.display.specshow(A, cmap='inferno_r')
 plt.title('Combined graph')
 plt.tight_layout()
 
@@ -149,7 +149,7 @@ X = evecs[:, :k] / Cnorm[:, k-1:k]
 
 plt.figure(figsize=(8, 4))
 plt.subplot(1,2,2)
-librosa.display.specshow(Rf, aspect='equal', cmap='inferno_r')
+librosa.display.specshow(Rf, cmap='inferno_r')
 plt.title('Recurrence matrix')
 
 plt.subplot(1,2,1)
@@ -173,7 +173,7 @@ plt.figure(figsize=(12, 4))
 colors = plt.get_cmap('Paired', k)
 
 plt.subplot(1,3,2)
-librosa.display.specshow(Rf, aspect='equal', cmap='inferno_r')
+librosa.display.specshow(Rf, cmap='inferno_r')
 plt.title('Recurrence matrix')
 plt.subplot(1,3,1)
 librosa.display.specshow(X)
@@ -214,15 +214,20 @@ bound_frames = librosa.util.fix_frames(bound_frames,
 import matplotlib.patches as patches
 plt.figure(figsize=(12, 4))
 
+bound_times = librosa.frames_to_time(bound_frames)
+freqs = librosa.cqt_frequencies(n_bins=C.shape[0],
+                                fmin=librosa.note_to_hz('C1'),
+                                bins_per_octave=BINS_PER_OCTAVE)
+
 librosa.display.specshow(C, y_axis='cqt_hz', sr=sr,
                          bins_per_octave=BINS_PER_OCTAVE,
                          x_axis='time')
 ax = plt.gca()
 
-for interval, label in zip(zip(bound_frames, bound_frames[1:]), bound_segs):
-    ax.add_patch(patches.Rectangle((interval[0], -0.5),
+for interval, label in zip(zip(bound_times, bound_times[1:]), bound_segs):
+    ax.add_patch(patches.Rectangle((interval[0], freqs[0]),
                                    interval[1] - interval[0],
-                                   C.shape[0],
+                                   freqs[-1],
                                    facecolor=colors(label),
                                    alpha=0.50))
 
