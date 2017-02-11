@@ -32,8 +32,11 @@
   
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="librosa-gallery 0.1.0 documentation" href="../index.html"/>
-        <link rel="next" title="Vocal separation" href="plot_vocal_separation.html"/>
+        <link rel="next" title="Harmonic-percussive source separation" href="plot_hprss.html"/>
         <link rel="prev" title="Librosa example gallery" href="../index.html"/> 
 
   
@@ -83,16 +86,14 @@
           
             
             
-                <ul class="simple">
-</ul>
-<ul class="current">
+                <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Superflux onsets</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="plot_vocal_separation.html">Vocal separation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_hprss.html">Harmonic-percussive source separation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="plot_hprss.html">Harmonic-percussive source separation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_vocal_separation.html">Vocal separation</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="plot_chroma.html">Enhanced chroma</a></li>
@@ -133,7 +134,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/auto_examples/plot_superflux.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/auto_examples/plot_superflux.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -157,10 +158,9 @@ from librosa.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.style</span> <span class="kn">as</span> <span class="nn">style</span>
-<span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-muted&#39;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">librosa</span>
+<span class="kn">import</span> <span class="nn">librosa.display</span>
 </pre></div>
 </div>
 <p>We&#8217;ll load in a five-second clip of a track that has
@@ -193,7 +193,7 @@ simplicity, we&#8217;ll use a Mel spectrogram instead.</p>
 
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">logamplitude</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">ref_power</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">),</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">power_to_db</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">),</span>
                          <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;mel&#39;</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
                          <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="n">fmin</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="n">fmax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -202,18 +202,21 @@ simplicity, we&#8217;ll use a Mel spectrogram instead.</p>
 <img alt="../_images/sphx_glr_plot_superflux_001.png" class="align-center" src="../_images/sphx_glr_plot_superflux_001.png" />
 <p>Now we&#8217;ll compute the onset strength envelope and onset events
 using the librosa defaults.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">odf_default</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">onset</span><span class="o">.</span><span class="n">onset_strength</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
-<span class="n">onset_default</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">onset</span><span class="o">.</span><span class="n">onset_detect</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">odf_default</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">onset</span><span class="o">.</span><span class="n">onset_strength</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">)</span>
+<span class="n">onset_default</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">onset</span><span class="o">.</span><span class="n">onset_detect</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span>
+                                           <span class="n">units</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>And similarly with the superflux method</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">odf_sf</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">onset</span><span class="o">.</span><span class="n">onset_strength</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="n">librosa</span><span class="o">.</span><span class="n">logamplitude</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">odf_sf</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">onset</span><span class="o">.</span><span class="n">onset_strength</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="n">librosa</span><span class="o">.</span><span class="n">power_to_db</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">),</span>
+                                      <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
                                       <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span>
                                       <span class="n">lag</span><span class="o">=</span><span class="n">lag</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="n">max_size</span><span class="p">)</span>
 
 <span class="n">onset_sf</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">onset</span><span class="o">.</span><span class="n">onset_detect</span><span class="p">(</span><span class="n">onset_envelope</span><span class="o">=</span><span class="n">odf_sf</span><span class="p">,</span>
                                       <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
-                                      <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">)</span>
+                                      <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span>
+                                      <span class="n">units</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If you look carefully, the default onset detector (top sub-plot) has
@@ -224,14 +227,17 @@ does not detect onset events at those points.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">#sphinx_gallery_thumbnail_number = 2</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">logamplitude</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">top_db</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">ref_power</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">),</span>
-                         <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;mel&#39;</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
-                         <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="n">fmin</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="n">fmax</span><span class="p">,</span>
-                         <span class="n">n_xticks</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">frame_time</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">frames_to_time</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">odf_default</span><span class="p">)),</span>
+                                    <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
+                                    <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">odf_default</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Spectral flux&#39;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">power_to_db</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">),</span>
+                         <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;mel&#39;</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
+                         <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="n">fmin</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="n">fmax</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frame_time</span><span class="p">,</span> <span class="n">odf_default</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Spectral flux&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">onset_default</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">odf_default</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Onsets&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
@@ -239,8 +245,8 @@ does not detect onset events at those points.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">odf_sf</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Superflux&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frame_time</span><span class="p">,</span> <span class="n">odf_sf</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Superflux&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">onset_sf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">odf_sf</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Onsets&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
@@ -253,7 +259,7 @@ does not detect onset events at those points.</p>
 </div>
 <img alt="../_images/sphx_glr_plot_superflux_002.png" class="align-center" src="../_images/sphx_glr_plot_superflux_002.png" />
 <p><strong>Total running time of the script:</strong>
-(0 minutes 0.517 seconds)</p>
+(0 minutes 0.773 seconds)</p>
 <div class="sphx-glr-download container">
 <strong>Download Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_superflux.py" download=""><code class="xref download docutils literal"><span class="pre">plot_superflux.py</span></code></a></div>
 <div class="sphx-glr-download container">
@@ -268,7 +274,7 @@ does not detect onset events at those points.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="plot_vocal_separation.html" class="btn btn-neutral float-right" title="Vocal separation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="plot_hprss.html" class="btn btn-neutral float-right" title="Harmonic-percussive source separation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../index.html" class="btn btn-neutral" title="Librosa example gallery" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

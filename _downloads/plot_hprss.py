@@ -17,10 +17,9 @@ and its margin-based extension due to `Dreidger, Mueller and Disch, 2014
 from __future__ import print_function
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.style as style
-style.use('seaborn-muted')
 
 import librosa
+import librosa.display
 
 ########################
 # Load the example clip.
@@ -42,22 +41,22 @@ D_harmonic, D_percussive = librosa.decompose.hpss(D)
 # We can plot the two components along with the original spectrogram
 
 # Pre-compute a global reference power from the input spectrum
-rp = np.max(np.abs(D))**2
+rp = np.max(np.abs(D))
 
 plt.figure(figsize=(12, 8))
 
 plt.subplot(3,1,1)
-librosa.display.specshow(librosa.logamplitude(D**2, ref_power=rp), y_axis='log')
+librosa.display.specshow(librosa.amplitude_to_db(D, ref=rp), y_axis='log')
 plt.colorbar()
 plt.title('Full spectrogram')
 
 plt.subplot(3,1,2)
-librosa.display.specshow(librosa.logamplitude(D_harmonic**2, ref_power=rp), y_axis='log')
+librosa.display.specshow(librosa.amplitude_to_db(D_harmonic, ref=rp), y_axis='log')
 plt.colorbar()
 plt.title('Harmonic spectrogram')
 
 plt.subplot(3,1,3)
-librosa.display.specshow(librosa.logamplitude(D_percussive**2, ref_power=rp), y_axis='log', x_axis='time')
+librosa.display.specshow(librosa.amplitude_to_db(D_percussive, ref=rp), y_axis='log', x_axis='time')
 plt.colorbar()
 plt.title('Percussive spectrogram')
 plt.tight_layout()
@@ -91,50 +90,50 @@ D_harmonic16, D_percussive16 = librosa.decompose.hpss(D, margin=16)
 plt.figure(figsize=(10, 10))
 
 plt.subplot(5,2,1)
-librosa.display.specshow(librosa.logamplitude(D_harmonic**2, ref_power=rp), y_axis='log')
+librosa.display.specshow(librosa.amplitude_to_db(D_harmonic, ref=rp), y_axis='log')
 plt.title('Harmonic')
 plt.yticks([])
 plt.ylabel('margin=1')
 
 plt.subplot(5,2,2)
-librosa.display.specshow(librosa.logamplitude(D_percussive**2, ref_power=rp), y_axis='log')
+librosa.display.specshow(librosa.amplitude_to_db(D_percussive, ref=rp), y_axis='log')
 plt.title('Percussive')
 plt.yticks([]) ,plt.ylabel('')
 
 plt.subplot(5,2,3)
-librosa.display.specshow(librosa.logamplitude(D_harmonic2**2, ref_power=rp), y_axis='log')
+librosa.display.specshow(librosa.amplitude_to_db(D_harmonic2, ref=rp), y_axis='log')
 plt.yticks([])
 plt.ylabel('margin=2')
 
 plt.subplot(5,2,4)
-librosa.display.specshow(librosa.logamplitude(D_percussive2**2, ref_power=rp), y_axis='log')
+librosa.display.specshow(librosa.amplitude_to_db(D_percussive2, ref=rp), y_axis='log')
 plt.yticks([]) ,plt.ylabel('')
 
 plt.subplot(5,2,5)
-librosa.display.specshow(librosa.logamplitude(D_harmonic4**2, ref_power=rp), y_axis='log')
+librosa.display.specshow(librosa.amplitude_to_db(D_harmonic4, ref=rp), y_axis='log')
 plt.yticks([])
 plt.ylabel('margin=4')
 
 plt.subplot(5,2,6)
-librosa.display.specshow(librosa.logamplitude(D_percussive4**2, ref_power=rp), y_axis='log')
+librosa.display.specshow(librosa.amplitude_to_db(D_percussive4, ref=rp), y_axis='log')
 plt.yticks([]) ,plt.ylabel('')
 
 plt.subplot(5,2,7)
-librosa.display.specshow(librosa.logamplitude(D_harmonic8**2, ref_power=rp), y_axis='log')
+librosa.display.specshow(librosa.amplitude_to_db(D_harmonic8, ref=rp), y_axis='log')
 plt.yticks([])
 plt.ylabel('margin=8')
 
 plt.subplot(5,2,8)
-librosa.display.specshow(librosa.logamplitude(D_percussive8**2, ref_power=rp), y_axis='log')
+librosa.display.specshow(librosa.amplitude_to_db(D_percussive8, ref=rp), y_axis='log')
 plt.yticks([]) ,plt.ylabel('')
 
 plt.subplot(5,2,9)
-librosa.display.specshow(librosa.logamplitude(D_harmonic16**2, ref_power=rp), y_axis='log')
+librosa.display.specshow(librosa.amplitude_to_db(D_harmonic16, ref=rp), y_axis='log')
 plt.yticks([])
 plt.ylabel('margin=16')
 
 plt.subplot(5,2,10)
-librosa.display.specshow(librosa.logamplitude(D_percussive16**2, ref_power=rp), y_axis='log')
+librosa.display.specshow(librosa.amplitude_to_db(D_percussive16, ref=rp), y_axis='log')
 plt.yticks([]) ,plt.ylabel('')
 
 plt.tight_layout()

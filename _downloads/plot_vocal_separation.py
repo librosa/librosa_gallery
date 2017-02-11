@@ -27,6 +27,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import librosa
 
+import librosa.display
 
 #############################################
 # Load an example with vocals.
@@ -41,7 +42,7 @@ S_full, phase = librosa.magphase(librosa.stft(y))
 # Plot a 5-second slice of the spectrum
 idx = slice(*librosa.time_to_frames([30, 35], sr=sr))
 plt.figure(figsize=(12, 4))
-librosa.display.specshow(librosa.logamplitude(S_full[:, idx]**2, ref_power=np.max),
+librosa.display.specshow(librosa.amplitude_to_db(S_full[:, idx], ref=np.max),
                          y_axis='log', x_axis='time', sr=sr)
 plt.colorbar()
 plt.tight_layout()
@@ -104,18 +105,18 @@ S_background = mask_i * S_full
 
 plt.figure(figsize=(12, 8))
 plt.subplot(3,1,1)
-librosa.display.specshow(librosa.logamplitude(S_full[:, idx]**2, ref_power=np.max),
+librosa.display.specshow(librosa.amplitude_to_db(S_full[:, idx], ref=np.max),
                          y_axis='log', sr=sr)
 plt.title('Full spectrum')
 plt.colorbar()
 
 plt.subplot(3,1,2)
-librosa.display.specshow(librosa.logamplitude(S_background[:, idx]**2, ref_power=np.max),
+librosa.display.specshow(librosa.amplitude_to_db(S_background[:, idx], ref=np.max),
                          y_axis='log', sr=sr)
 plt.title('Background')
 plt.colorbar()
 plt.subplot(3,1,3)
-librosa.display.specshow(librosa.logamplitude(S_foreground[:, idx]**2, ref_power=np.max),
+librosa.display.specshow(librosa.amplitude_to_db(S_foreground[:, idx], ref=np.max),
                          y_axis='log', x_axis='time', sr=sr)
 plt.title('Foreground')
 plt.colorbar()

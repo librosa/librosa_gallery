@@ -32,6 +32,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="librosa-gallery 0.1.0 documentation" href="../index.html"/>
         <link rel="prev" title="Enhanced chroma" href="plot_chroma.html"/> 
 
@@ -82,16 +85,14 @@
           
             
             
-                <ul class="simple">
-</ul>
-<ul>
+                <ul>
 <li class="toctree-l1"><a class="reference internal" href="plot_superflux.html">Superflux onsets</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="plot_vocal_separation.html">Vocal separation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_hprss.html">Harmonic-percussive source separation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="plot_hprss.html">Harmonic-percussive source separation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_vocal_separation.html">Vocal separation</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="plot_chroma.html">Enhanced chroma</a></li>
@@ -132,7 +133,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/auto_examples/plot_segmentation.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/auto_examples/plot_segmentation.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -168,11 +169,11 @@ helpful to read along.</p>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.style</span> <span class="kn">as</span> <span class="nn">style</span>
-<span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-muted&#39;</span><span class="p">)</span>
+
 <span class="kn">import</span> <span class="nn">sklearn.cluster</span>
 
 <span class="kn">import</span> <span class="nn">librosa</span>
+<span class="kn">import</span> <span class="nn">librosa.display</span>
 </pre></div>
 </div>
 <p>First, we&#8217;ll load in a song</p>
@@ -182,11 +183,10 @@ helpful to read along.</p>
 <p>Next, we&#8217;ll compute and plot a log-power CQT</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">BINS_PER_OCTAVE</span> <span class="o">=</span> <span class="mi">12</span> <span class="o">*</span> <span class="mi">3</span>
 <span class="n">N_OCTAVES</span> <span class="o">=</span> <span class="mi">7</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">logamplitude</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">cqt</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
-                                            <span class="n">bins_per_octave</span><span class="o">=</span><span class="n">BINS_PER_OCTAVE</span><span class="p">,</span>
-                                            <span class="n">n_bins</span><span class="o">=</span><span class="n">N_OCTAVES</span> <span class="o">*</span> <span class="n">BINS_PER_OCTAVE</span><span class="p">,</span>
-                                            <span class="n">real</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
-                         <span class="n">ref_power</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">amplitude_to_db</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">cqt</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
+                                        <span class="n">bins_per_octave</span><span class="o">=</span><span class="n">BINS_PER_OCTAVE</span><span class="p">,</span>
+                                        <span class="n">n_bins</span><span class="o">=</span><span class="n">N_OCTAVES</span> <span class="o">*</span> <span class="n">BINS_PER_OCTAVE</span><span class="p">),</span>
+                            <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;cqt_hz&#39;</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
@@ -246,13 +246,13 @@ mode=&#8217;affinity&#8217; here implements S_rep (after Eq. 8)</p>
 <p>Plot the resulting graphs (Figure 1, left and center)</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Recurrence similarity&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">R_path</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">R_path</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Path similarity&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Combined graph&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
@@ -286,7 +286,7 @@ mode=&#8217;affinity&#8217; here implements S_rep (after Eq. 8)</p>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Recurrence matrix&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
@@ -309,7 +309,7 @@ mode=&#8217;affinity&#8217; here implements S_rep (after Eq. 8)</p>
 <span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;Paired&#39;</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Recurrence matrix&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -347,15 +347,20 @@ mode=&#8217;affinity&#8217; here implements S_rep (after Eq. 8)</p>
 <span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="kn">as</span> <span class="nn">patches</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 
+<span class="n">bound_times</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">frames_to_time</span><span class="p">(</span><span class="n">bound_frames</span><span class="p">)</span>
+<span class="n">freqs</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">cqt_frequencies</span><span class="p">(</span><span class="n">n_bins</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                <span class="n">fmin</span><span class="o">=</span><span class="n">librosa</span><span class="o">.</span><span class="n">note_to_hz</span><span class="p">(</span><span class="s1">&#39;C1&#39;</span><span class="p">),</span>
+                                <span class="n">bins_per_octave</span><span class="o">=</span><span class="n">BINS_PER_OCTAVE</span><span class="p">)</span>
+
 <span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;cqt_hz&#39;</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
                          <span class="n">bins_per_octave</span><span class="o">=</span><span class="n">BINS_PER_OCTAVE</span><span class="p">,</span>
                          <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
 
-<span class="k">for</span> <span class="n">interval</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">bound_frames</span><span class="p">,</span> <span class="n">bound_frames</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span> <span class="n">bound_segs</span><span class="p">):</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="n">interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">),</span>
+<span class="k">for</span> <span class="n">interval</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">bound_times</span><span class="p">,</span> <span class="n">bound_times</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span> <span class="n">bound_segs</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="n">interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">freqs</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
                                    <span class="n">interval</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                   <span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                   <span class="n">freqs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
                                    <span class="n">facecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">(</span><span class="n">label</span><span class="p">),</span>
                                    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.50</span><span class="p">))</span>
 
@@ -365,7 +370,7 @@ mode=&#8217;affinity&#8217; here implements S_rep (after Eq. 8)</p>
 </div>
 <img alt="../_images/sphx_glr_plot_segmentation_006.png" class="align-center" src="../_images/sphx_glr_plot_segmentation_006.png" />
 <p><strong>Total running time of the script:</strong>
-(0 minutes 7.905 seconds)</p>
+(0 minutes 9.142 seconds)</p>
 <div class="sphx-glr-download container">
 <strong>Download Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_segmentation.py" download=""><code class="xref download docutils literal"><span class="pre">plot_segmentation.py</span></code></a></div>
 <div class="sphx-glr-download container">

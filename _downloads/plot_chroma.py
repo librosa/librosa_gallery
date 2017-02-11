@@ -25,10 +25,9 @@ from __future__ import print_function
 import numpy as np
 import scipy
 import matplotlib.pyplot as plt
-import matplotlib.style as style
-style.use('seaborn-muted')
 
 import librosa
+import librosa.display
 
 
 #######################################################################
@@ -51,7 +50,7 @@ C = np.abs(librosa.cqt(y=y, sr=sr, bins_per_octave=12*3, n_bins=7*12*3, real=Fal
 
 plt.figure(figsize=(12, 4))
 plt.subplot(2,1,1)
-librosa.display.specshow(librosa.logamplitude(C**2, ref_power=np.max)[idx],
+librosa.display.specshow(librosa.amplitude_to_db(C, ref=np.max)[idx],
                          y_axis='cqt_note', bins_per_octave=12*3)
 plt.colorbar()
 plt.subplot(2,1,2)
@@ -153,7 +152,7 @@ plt.tight_layout()
 # and the result of our filtering.
 plt.figure(figsize=(12, 8))
 plt.subplot(3,1,1)
-librosa.display.specshow(librosa.logamplitude(C**2, ref_power=np.max)[idx],
+librosa.display.specshow(librosa.amplitude_to_db(C, ref=np.max)[idx],
                          y_axis='cqt_note', bins_per_octave=12*3)
 plt.colorbar()
 plt.ylabel('CQT')
