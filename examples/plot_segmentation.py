@@ -22,6 +22,7 @@ helpful to read along.
 #   - scipy for graph Laplacian
 #   - matplotlib for visualization
 #   - sklearn.cluster for K-Means
+#
 from __future__ import print_function
 
 import numpy as np
@@ -59,9 +60,17 @@ plt.tight_layout()
 tempo, beats = librosa.beat.beat_track(y=y, sr=sr, trim=False)
 Csync = librosa.util.sync(C, beats, aggregate=np.median)
 
+# For plotting purposes, we'll need the timing of the beats
+# we fix_frames to include non-beat frames 0 and C.shape[1] (final frame)
+beat_times = librosa.frames_to_time(librosa.util.fix_frames(beats,
+                                                            x_min=0,
+                                                            x_max=C.shape[1]),
+                                    sr=sr)
 
 plt.figure(figsize=(12, 4))
-librosa.display.specshow(Csync, bins_per_octave=12*3, y_axis='cqt_hz')
+librosa.display.specshow(Csync, bins_per_octave=12*3,
+                         y_axis='cqt_hz', x_axis='time',
+                         x_coords=beat_times)
 plt.tight_layout()
 
 
@@ -80,8 +89,11 @@ Rf = df(R, size=(1, 7))
 
 ###################################################################
 # Now let's build the sequence matrix (S_loc) using mfcc-similarity
+#
 #   :math:`R_\text{path}[i, i\pm 1] = \exp(-\|C_i - C_{i\pm 1}\|^2 / \sigma^2)`
+#
 # Here, we take :math:`\sigma` to be the median distance between successive beats.
+#
 mfcc = librosa.feature.mfcc(y=y, sr=sr)
 Msync = librosa.util.sync(mfcc, beats)
 
@@ -107,7 +119,8 @@ A = mu * Rf + (1 - mu) * R_path
 # Plot the resulting graphs (Figure 1, left and center)
 plt.figure(figsize=(8, 4))
 plt.subplot(1, 3, 1)
-librosa.display.specshow(Rf, cmap='inferno_r')
+librosa.display.specshow(Rf, cmap='inferno_r', y_axis='time',
+                         y_coords=beat_times)
 plt.title('Recurrence similarity')
 plt.subplot(1, 3, 2)
 librosa.display.specshow(R_path, cmap='inferno_r')
@@ -151,9 +164,10 @@ librosa.display.specshow(Rf, cmap='inferno_r')
 plt.title('Recurrence matrix')
 
 plt.subplot(1, 2, 1)
-librosa.display.specshow(X)
+librosa.display.specshow(X,
+                         y_axis='time',
+                         y_coords=beat_times)
 plt.title('Structure components')
-plt.ylabel('Time')
 plt.tight_layout()
 
 
@@ -173,9 +187,10 @@ plt.subplot(1, 3, 2)
 librosa.display.specshow(Rf, cmap='inferno_r')
 plt.title('Recurrence matrix')
 plt.subplot(1, 3, 1)
-librosa.display.specshow(X)
+librosa.display.specshow(X,
+                         y_axis='time',
+                         y_coords=beat_times)
 plt.title('Structure components')
-plt.ylabel('Time')
 plt.subplot(1, 3, 3)
 librosa.display.specshow(np.atleast_2d(seg_ids).T, cmap=colors)
 plt.title('Estimated segments')

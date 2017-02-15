@@ -104,22 +104,19 @@ librosa.display.specshow(librosa.power_to_db(S, ref=np.max),
                          y_axis='mel', x_axis='time', sr=sr,
                          hop_length=hop_length, fmin=fmin, fmax=fmax)
 
+
 plt.subplot(4, 1, 1, sharex=ax)
 plt.plot(frame_time, odf_default, label='Spectral flux')
-plt.vlines(onset_default, 0, odf_default.max(), color='r', label='Onsets')
-plt.yticks([])
-plt.xticks([])
-plt.axis('tight')
+plt.vlines(onset_default, 0, odf_default.max(), label='Onsets')
+plt.xlim([0, 5.0])
 plt.legend()
 
 
 plt.subplot(4, 1, 2, sharex=ax)
 plt.plot(frame_time, odf_sf, color='g', label='Superflux')
-plt.vlines(onset_sf, 0, odf_sf.max(), color='r', label='Onsets')
-plt.xticks([])
-plt.yticks([])
+plt.vlines(onset_sf, 0, odf_sf.max(), label='Onsets')
+plt.xlim([0, 5.0])
 plt.legend()
-plt.axis('tight')
 
 plt.tight_layout()
 plt.show()

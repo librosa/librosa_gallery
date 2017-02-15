@@ -31,9 +31,9 @@ import librosa.display
 
 
 ############################################################
-# =====================
+# ---------------------
 # Load Audio Recordings
-# =====================
+# ---------------------
 # First, let's load a first version of our audio recordings.
 x_1, fs = librosa.load('audio/sir_duke_slow.mp3')
 plt.figure(figsize=(16, 4))
@@ -50,9 +50,9 @@ plt.title('Faster Version $X_2$')
 plt.tight_layout()
 
 #########################
-# =======================
+# -----------------------
 # Extract Chroma Features
-# =======================
+# -----------------------
 n_fft = 4410
 hop_size = 2205
 
@@ -76,9 +76,9 @@ plt.tight_layout()
 
 
 ########################
-# ======================
+# ----------------------
 # Align Chroma Sequences
-# ======================
+# ----------------------
 D, wp = librosa.core.dtw(X=x_1_chroma, Y=x_2_chroma, metric='cosine')
 wp_s = np.asarray(wp) * hop_size / fs
 
@@ -93,9 +93,9 @@ plt.title('Warping Path on Acc. Cost Matrix $D$')
 plt.colorbar()
 
 ##############################################
-# ============================================
+# --------------------------------------------
 # Alternative Visualization in the Time Domain
-# ============================================
+# --------------------------------------------
 #
 # We can also visualize the wariping path directly on our time domain signals.
 # Red lines connect corresponding time positions in the input signals.
@@ -139,9 +139,9 @@ fig.lines = lines
 plt.tight_layout()
 
 ###########################################################
-# =============
+# -------------
 # Next steps...
-# =============
+# -------------
 #
 # Alright, you might ask where to go from here.
 # Once we have the warping path between our two signals,
@@ -153,9 +153,9 @@ plt.tight_layout()
 # Another example is that you could apply time scale modification algorithms,
 # e.g. speed up the slower signal to the tempo of the faster one.
 #
-# ==========
+# ----------
 # Literature
-# ==========
+# ----------
 #
 # [1] Meinard Müller, Fundamentals of Music Processing — Audio, Analysis, Algorithms, Applications.
 # Springer Verlag, 2015.
