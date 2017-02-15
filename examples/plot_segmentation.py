@@ -22,6 +22,7 @@ helpful to read along.
 #   - scipy for graph Laplacian
 #   - matplotlib for visualization
 #   - sklearn.cluster for K-Means
+#
 from __future__ import print_function
 
 import numpy as np
@@ -88,8 +89,11 @@ Rf = df(R, size=(1, 7))
 
 ###################################################################
 # Now let's build the sequence matrix (S_loc) using mfcc-similarity
+#
 #   :math:`R_\text{path}[i, i\pm 1] = \exp(-\|C_i - C_{i\pm 1}\|^2 / \sigma^2)`
+#
 # Here, we take :math:`\sigma` to be the median distance between successive beats.
+#
 mfcc = librosa.feature.mfcc(y=y, sr=sr)
 Msync = librosa.util.sync(mfcc, beats)
 
