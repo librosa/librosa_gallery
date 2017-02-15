@@ -4,8 +4,8 @@
 Laplacian segmentation
 ======================
 
-This notebook implements the laplacian segmentation method of 
-`McFee and Ellis, 2014 <http://bmcfee.github.io/papers/ismir2014_spectral.pdf>`_, 
+This notebook implements the laplacian segmentation method of
+`McFee and Ellis, 2014 <http://bmcfee.github.io/papers/ismir2014_spectral.pdf>`_,
 with a couple of minor stability improvements.
 
 Throughout the example, we will refer to equations in the paper by number, so it will be
@@ -106,13 +106,13 @@ A = mu * Rf + (1 - mu) * R_path
 ###########################################################
 # Plot the resulting graphs (Figure 1, left and center)
 plt.figure(figsize=(8, 4))
-plt.subplot(1,3,1)
+plt.subplot(1, 3, 1)
 librosa.display.specshow(Rf, cmap='inferno_r')
 plt.title('Recurrence similarity')
-plt.subplot(1,3,2)
+plt.subplot(1, 3, 2)
 librosa.display.specshow(R_path, cmap='inferno_r')
 plt.title('Path similarity')
-plt.subplot(1,3,3)
+plt.subplot(1, 3, 3)
 librosa.display.specshow(A, cmap='inferno_r')
 plt.title('Combined graph')
 plt.tight_layout()
@@ -123,7 +123,7 @@ plt.tight_layout()
 L = scipy.sparse.csgraph.laplacian(A, normed=True)
 
 
-# and its spectral decomposition 
+# and its spectral decomposition
 evals, evecs = scipy.linalg.eigh(L)
 
 
@@ -146,16 +146,15 @@ X = evecs[:, :k] / Cnorm[:, k-1:k]
 # Plot the resulting representation (Figure 1, center and right)
 
 plt.figure(figsize=(8, 4))
-plt.subplot(1,2,2)
+plt.subplot(1, 2, 2)
 librosa.display.specshow(Rf, cmap='inferno_r')
 plt.title('Recurrence matrix')
 
-plt.subplot(1,2,1)
+plt.subplot(1, 2, 1)
 librosa.display.specshow(X)
 plt.title('Structure components')
 plt.ylabel('Time')
 plt.tight_layout()
-
 
 
 #############################################################
@@ -170,19 +169,18 @@ seg_ids = KM.fit_predict(X)
 plt.figure(figsize=(12, 4))
 colors = plt.get_cmap('Paired', k)
 
-plt.subplot(1,3,2)
+plt.subplot(1, 3, 2)
 librosa.display.specshow(Rf, cmap='inferno_r')
 plt.title('Recurrence matrix')
-plt.subplot(1,3,1)
+plt.subplot(1, 3, 1)
 librosa.display.specshow(X)
 plt.title('Structure components')
 plt.ylabel('Time')
-plt.subplot(1,3,3)
+plt.subplot(1, 3, 3)
 librosa.display.specshow(np.atleast_2d(seg_ids).T, cmap=colors)
 plt.title('Estimated segments')
 plt.colorbar(ticks=range(k))
 plt.tight_layout()
-
 
 
 ###############################################################
@@ -207,7 +205,7 @@ bound_frames = librosa.util.fix_frames(bound_frames,
 # And plot the final segmentation over original CQT
 
 
-#sphinx_gallery_thumbnail_number = 5
+# sphinx_gallery_thumbnail_number = 5
 
 import matplotlib.patches as patches
 plt.figure(figsize=(12, 4))
@@ -231,4 +229,3 @@ for interval, label in zip(zip(bound_times, bound_times[1:]), bound_segs):
 
 plt.tight_layout()
 plt.show()
-

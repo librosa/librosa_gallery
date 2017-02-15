@@ -4,10 +4,10 @@
 Vocal separation
 ================
 
-This notebook demonstrates a simple technique for separating vocals (and 
+This notebook demonstrates a simple technique for separating vocals (and
 other sporadic foreground signals) from accompanying instrumentation.
- 
-This is based on the "REPET-SIM" method of `Rafii and Pardo, 2012 
+
+This is based on the "REPET-SIM" method of `Rafii and Pardo, 2012
 <http://www.cs.northwestern.edu/~zra446/doc/Rafii-Pardo%20-%20Music-Voice%20Separation%20using%20the%20Similarity%20Matrix%20-%20ISMIR%202012.pdf>`_, but includes a couple of modifications and extensions:
 
     - FFT windows overlap by 1/4, instead of 1/2
@@ -97,25 +97,24 @@ S_foreground = mask_v * S_full
 S_background = mask_i * S_full
 
 
-
 ##########################################
 # Plot the same slice, but separated into its foreground and background
 
-#sphinx_gallery_thumbnail_number = 2
+# sphinx_gallery_thumbnail_number = 2
 
 plt.figure(figsize=(12, 8))
-plt.subplot(3,1,1)
+plt.subplot(3, 1, 1)
 librosa.display.specshow(librosa.amplitude_to_db(S_full[:, idx], ref=np.max),
                          y_axis='log', sr=sr)
 plt.title('Full spectrum')
 plt.colorbar()
 
-plt.subplot(3,1,2)
+plt.subplot(3, 1, 2)
 librosa.display.specshow(librosa.amplitude_to_db(S_background[:, idx], ref=np.max),
                          y_axis='log', sr=sr)
 plt.title('Background')
 plt.colorbar()
-plt.subplot(3,1,3)
+plt.subplot(3, 1, 3)
 librosa.display.specshow(librosa.amplitude_to_db(S_foreground[:, idx], ref=np.max),
                          y_axis='log', x_axis='time', sr=sr)
 plt.title('Foreground')
