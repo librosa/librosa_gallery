@@ -4,8 +4,8 @@
 Superflux onsets
 ================
 
-This notebook demonstrates how to recover the Superflux onset detection algorithm of 
-`Boeck and Widmer, 2013 <http://dafx13.nuim.ie/papers/09.dafx2013_submission_12.pdf>`_ 
+This notebook demonstrates how to recover the Superflux onset detection algorithm of
+`Boeck and Widmer, 2013 <http://dafx13.nuim.ie/papers/09.dafx2013_submission_12.pdf>`_
 from librosa.
 
 This algorithm improves onset detection accuracy in the presence of vibrato.
@@ -15,7 +15,7 @@ This algorithm improves onset detection accuracy in the presence of vibrato.
 # License: ISC
 
 ##################################################
-# We'll need numpy and matplotlib for this example 
+# We'll need numpy and matplotlib for this example
 from __future__ import print_function
 import numpy as np
 import matplotlib.pyplot as plt
@@ -26,7 +26,7 @@ import librosa.display
 ######################################################
 # We'll load in a five-second clip of a track that has
 # noticeable vocal vibrato.
-# The method works fine for longer signals, but the 
+# The method works fine for longer signals, but the
 # results are harder to visualize.
 y, sr = librosa.load('audio/Karissa_Hobbs_-_09_-_Lets_Go_Fishin.mp3',
                      sr=44100,
@@ -62,14 +62,12 @@ librosa.display.specshow(librosa.power_to_db(S, ref=np.max),
 plt.tight_layout()
 
 
-
 ################################################################
 # Now we'll compute the onset strength envelope and onset events
 # using the librosa defaults.
 odf_default = librosa.onset.onset_strength(y=y, sr=sr, hop_length=hop_length)
 onset_default = librosa.onset.onset_detect(y=y, sr=sr, hop_length=hop_length,
                                            units='time')
-
 
 
 #########################################
@@ -88,25 +86,25 @@ onset_sf = librosa.onset.onset_detect(onset_envelope=odf_sf,
 ######################################################################
 # If you look carefully, the default onset detector (top sub-plot) has
 # several false positives in high-vibrato regions, eg around 0.62s or
-# 1.80s. 
-# 
+# 1.80s.
+#
 # The superflux method (middle plot) is less susceptible to vibrato, and
 # does not detect onset events at those points.
 
 
-#sphinx_gallery_thumbnail_number = 2
+# sphinx_gallery_thumbnail_number = 2
 plt.figure(figsize=(6, 6))
 
 frame_time = librosa.frames_to_time(np.arange(len(odf_default)),
                                     sr=sr,
                                     hop_length=hop_length)
 
-ax = plt.subplot(2,1,2)
+ax = plt.subplot(2, 1, 2)
 librosa.display.specshow(librosa.power_to_db(S, ref=np.max),
                          y_axis='mel', x_axis='time', sr=sr,
                          hop_length=hop_length, fmin=fmin, fmax=fmax)
 
-plt.subplot(4,1,1, sharex=ax)
+plt.subplot(4, 1, 1, sharex=ax)
 plt.plot(frame_time, odf_default, label='Spectral flux')
 plt.vlines(onset_default, 0, odf_default.max(), color='r', label='Onsets')
 plt.yticks([])
@@ -115,7 +113,7 @@ plt.axis('tight')
 plt.legend()
 
 
-plt.subplot(4,1,2, sharex=ax)
+plt.subplot(4, 1, 2, sharex=ax)
 plt.plot(frame_time, odf_sf, color='g', label='Superflux')
 plt.vlines(onset_sf, 0, odf_sf.max(), color='r', label='Onsets')
 plt.xticks([])
