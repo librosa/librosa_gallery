@@ -38,7 +38,18 @@ extensions = [
 
 sphinx_gallery_conf = {
         'examples_dirs': '../examples',
-        'gallery_dirs': 'auto_examples'}
+        'gallery_dirs': 'auto_examples',
+        'reference_url': {
+            'sphinx_gallery': None,
+            'numpy': 'http://docs.scipy.org/doc/numpy/',
+            'np': 'http://docs.scipy.org/doc/numpy/',
+            'scipy': 'http://docs.scipy.org/doc/scipy/reference/',
+            'matplotlib': 'http://matplotlib.org/',
+            'sklearn': 'http://scikit-learn.org/stable/',
+            'resampy': 'http://resampy.readthedocs.io/en/latest/',
+            'librosa': 'http://librosa.github.io/librosa/',
+            }
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
