@@ -103,6 +103,8 @@ ax = plt.subplot(2, 1, 2)
 librosa.display.specshow(librosa.power_to_db(S, ref=np.max),
                          y_axis='mel', x_axis='time', sr=sr,
                          hop_length=hop_length, fmin=fmin, fmax=fmax)
+plt.xlim([0, 5.0])
+plt.axis('tight')
 
 
 plt.subplot(4, 1, 1, sharex=ax)
