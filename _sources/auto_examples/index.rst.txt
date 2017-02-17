@@ -4,7 +4,7 @@ Librosa example gallery
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This notebook demonstrates how to recover the Superflux onset detection algorithm of  `Boeck an...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This notebook demonstrates how to recover the Superflux onset detection algorithm of `Boeck and...">
 
 .. only:: html
 
@@ -44,7 +44,7 @@ Librosa example gallery
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This notebook demonstrates a simple technique for separating vocals (and  other sporadic foregr...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This notebook demonstrates a simple technique for separating vocals (and other sporadic foregro...">
 
 .. only:: html
 
@@ -61,6 +61,26 @@ Librosa example gallery
    :hidden:
 
    /auto_examples/plot_vocal_separation
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In this short tutorial, we demonstrate the use of dynamic time warping (DTW) for music synchron...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_music_sync_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_music_sync.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_music_sync
 
 .. raw:: html
 
@@ -84,7 +104,7 @@ Librosa example gallery
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This notebook implements the laplacian segmentation method of  `McFee and Ellis, 2014 <http://b...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This notebook implements the laplacian segmentation method of `McFee and Ellis, 2014 <http://bm...">
 
 .. only:: html
 
