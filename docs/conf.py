@@ -67,7 +67,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'librosa-gallery'
-copyright = '2016, librosa development team'
+copyright = '2016-2017, librosa development team'
 author = 'librosa development team'
 
 # The version info for the project you're documenting, acts as replacement for
