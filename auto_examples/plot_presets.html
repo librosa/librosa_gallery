@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Presets &mdash; librosa-gallery 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="librosa-gallery 0.1.0 documentation" href="../index.html"/>
+        <link rel="next" title="Superflux onsets" href="plot_superflux.html"/>
+        <link rel="prev" title="Librosa example gallery" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> librosa-gallery
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Presets</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="plot_superflux.html">Superflux onsets</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="plot_hprss.html">Harmonic-percussive source separation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="plot_vocal_separation.html">Vocal separation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="plot_music_sync.html">Music Synchronization with Dynamic Time Warping</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="plot_chroma.html">Enhanced chroma</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="plot_segmentation.html">Laplacian segmentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">librosa-gallery</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Presets</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/auto_examples/plot_presets.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="presets">
+<span id="sphx-glr-auto-examples-plot-presets-py"></span><h1>Presets<a class="headerlink" href="#presets" title="Permalink to this headline">¶</a></h1>
+<p>This notebook demonstrates how to use the <cite>presets</cite> package to change the
+default parameters for librosa.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Code source: Brian McFee</span>
+<span class="c1"># License: ISC</span>
+</pre></div>
+</div>
+<p>We’ll need numpy and matplotlib for this example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Import the Preset class</span>
+<span class="kn">from</span> <span class="nn">presets</span> <span class="kn">import</span> <span class="n">Preset</span>
+
+
+<span class="c1"># To use presets, we&#39;ll make a dummy import of librosa</span>
+<span class="c1"># and the display submodule here.</span>
+<span class="kn">import</span> <span class="nn">librosa</span> <span class="kn">as</span> <span class="nn">_librosa</span>
+<span class="kn">import</span> <span class="nn">librosa.display</span> <span class="kn">as</span> <span class="nn">_display</span>
+<span class="c1"># The assignment here is to circumvent python&#39;s inability</span>
+<span class="c1"># to rename submodule imports within the package</span>
+<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display" title="View documentation for librosa.display"><span class="n">_librosa</span><span class="o">.</span><span class="n">display</span></a> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display" title="View documentation for librosa.display"><span class="n">_display</span></a>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>By default, librosa uses the following parameters across all functions:</dt>
+<dd><ul class="first last simple">
+<li><cite>sr=22050</cite> (sampling rate)</li>
+<li><cite>hop_length=512</cite> (number of samples between frames)</li>
+<li><cite>n_fft=2048</cite> (number of samples per frame in STFT-like analyses)</li>
+</ul>
+</dd>
+</dl>
+<p>You may want to change these values to suit your application, but
+doing so consistently in every function call can be somewhat cumbersome.</p>
+<p>Presets makes it easy to do this all at once by wrapping the module
+and all function calls, and overriding default arguments.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># First, we need to set up the preset-wrapped librosa import</span>
+
+<span class="n">librosa</span> <span class="o">=</span> <span class="n">Preset</span><span class="p">(</span><span class="n">_librosa</span><span class="p">)</span>
+
+<span class="c1"># To change the default sampling rate, we can set the `sr` entry:</span>
+<span class="n">librosa</span><span class="p">[</span><span class="s1">&#39;sr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">44100</span>
+
+<span class="c1"># and similarly for hop_length and n_fft</span>
+<span class="n">librosa</span><span class="p">[</span><span class="s1">&#39;hop_length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1024</span>
+<span class="n">librosa</span><span class="p">[</span><span class="s1">&#39;n_fft&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4096</span>
+
+<span class="c1"># In general, when you set `librosa[&#39;X&#39;]` for any string `X`, anywhere within</span>
+<span class="c1"># librosa where the parameter `X` occurs as a keyword-argument,</span>
+<span class="c1"># its default value will be replaced by whatever value you provide.</span>
+</pre></div>
+</div>
+<p>Now we can load in a file and do some analysis with the new defaults</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;audio/Karissa_Hobbs_-_09_-_Lets_Go_Fishin.mp3&#39;</span>
+
+<span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">35</span><span class="p">)</span>
+
+<span class="c1"># Generate a Mel spectrogram:</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">melspectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Of course, you can still override the new default manually, e.g.:</span>
+
+<span class="n">M_highres</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">melspectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
+
+
+<span class="c1"># And plot the results</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">power_to_db</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">),</span>
+                         <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;mel&#39;</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;44100/1024/4096&#39;</span><span class="p">)</span>
+
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">power_to_db</span><span class="p">(</span><span class="n">M_highres</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">),</span>
+                         <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+                         <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;mel&#39;</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;44100/512/4096&#39;</span><span class="p">)</span>
+
+<span class="c1"># We can repeat the whole process with different defaults, just by</span>
+<span class="c1"># updating the parameter entries</span>
+<span class="n">librosa</span><span class="p">[</span><span class="s1">&#39;sr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">11025</span>
+
+<span class="n">y2</span><span class="p">,</span> <span class="n">sr2</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">35</span><span class="p">)</span>
+<span class="n">M2</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">melspectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y2</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr2</span><span class="p">)</span>
+
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">power_to_db</span><span class="p">(</span><span class="n">M2</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">),</span>
+                         <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;mel&#39;</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;11025/1024/4096&#39;</span><span class="p">)</span>
+
+<a href="http://matplotlib.org/api/tight_layout_api.html#matplotlib.tight_layout" title="View documentation for matplotlib.pyplot.tight_layout"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span></a><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_presets_001.png" class="align-center" src="../_images/sphx_glr_plot_presets_001.png" />
+<p><strong>Total running time of the script:</strong> ( 0 minutes  1.027 seconds)</p>
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" href="../_downloads/plot_presets.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_presets.py</span></code></a></div>
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" href="../_downloads/plot_presets.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_presets.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="plot_superflux.html" class="btn btn-neutral float-right" title="Superflux onsets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="Librosa example gallery" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2017, librosa development team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

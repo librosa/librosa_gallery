@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -45,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -85,7 +88,13 @@
           
             
             
-                <ul>
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="plot_presets.html">Presets</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="plot_superflux.html">Superflux onsets</a></li>
 </ul>
 <ul>
@@ -114,8 +123,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">librosa-gallery</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">librosa-gallery</a>
+        
       </nav>
 
 
@@ -124,23 +135,40 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
-    <li>Laplacian segmentation</li>
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Laplacian segmentation</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../_sources/auto_examples/plot_segmentation.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -179,11 +207,11 @@ helpful to read along.</p>
 <span class="kn">import</span> <span class="nn">librosa.display</span>
 </pre></div>
 </div>
-<p>First, we&#8217;ll load in a song</p>
+<p>First, we’ll load in a song</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;audio/Karissa_Hobbs_-_09_-_Lets_Go_Fishin.mp3&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Next, we&#8217;ll compute and plot a log-power CQT</p>
+<p>Next, we’ll compute and plot a log-power CQT</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">BINS_PER_OCTAVE</span> <span class="o">=</span> <span class="mi">12</span> <span class="o">*</span> <span class="mi">3</span>
 <span class="n">N_OCTAVES</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="n">C</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">amplitude_to_db</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">cqt</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
@@ -191,99 +219,99 @@ helpful to read along.</p>
                                         <span class="n">n_bins</span><span class="o">=</span><span class="n">N_OCTAVES</span> <span class="o">*</span> <span class="n">BINS_PER_OCTAVE</span><span class="p">),</span>
                             <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;cqt_hz&#39;</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow" title="View documentation for librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;cqt_hz&#39;</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
                          <span class="n">bins_per_octave</span><span class="o">=</span><span class="n">BINS_PER_OCTAVE</span><span class="p">,</span>
                          <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<a href="http://matplotlib.org/api/tight_layout_api.html#matplotlib.tight_layout" title="View documentation for matplotlib.pyplot.tight_layout"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span></a><span class="p">()</span>
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_segmentation_001.png" class="align-center" src="../_images/sphx_glr_plot_segmentation_001.png" />
-<p>To reduce dimensionality, we&#8217;ll beat-synchronous the CQT</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">tempo</span><span class="p">,</span> <span class="n">beats</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.beat.beat_track.html#librosa.beat.beat_track"><span class="n">librosa</span><span class="o">.</span><span class="n">beat</span><span class="o">.</span><span class="n">beat_track</span></a><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">trim</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="n">Csync</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.util.sync.html#librosa.util.sync"><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">sync</span></a><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">beats</span><span class="p">,</span> <span class="n">aggregate</span><span class="o">=</span><a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html#numpy.median"><span class="n">np</span><span class="o">.</span><span class="n">median</span></a><span class="p">)</span>
+<p>To reduce dimensionality, we’ll beat-synchronous the CQT</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">tempo</span><span class="p">,</span> <span class="n">beats</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.beat.beat_track.html#librosa.beat.beat_track" title="View documentation for librosa.beat.beat_track"><span class="n">librosa</span><span class="o">.</span><span class="n">beat</span><span class="o">.</span><span class="n">beat_track</span></a><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">trim</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">Csync</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.util.sync.html#librosa.util.sync" title="View documentation for librosa.util.sync"><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">sync</span></a><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">beats</span><span class="p">,</span> <span class="n">aggregate</span><span class="o">=</span><a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html#numpy.median" title="View documentation for numpy.median"><span class="n">np</span><span class="o">.</span><span class="n">median</span></a><span class="p">)</span>
 
 <span class="c1"># For plotting purposes, we&#39;ll need the timing of the beats</span>
 <span class="c1"># we fix_frames to include non-beat frames 0 and C.shape[1] (final frame)</span>
-<span class="n">beat_times</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">frames_to_time</span><span class="p">(</span><a href="http://librosa.github.io/librosa/generated/librosa.util.fix_frames.html#librosa.util.fix_frames"><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">fix_frames</span></a><span class="p">(</span><span class="n">beats</span><span class="p">,</span>
+<span class="n">beat_times</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">frames_to_time</span><span class="p">(</span><a href="http://librosa.github.io/librosa/generated/librosa.util.fix_frames.html#librosa.util.fix_frames" title="View documentation for librosa.util.fix_frames"><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">fix_frames</span></a><span class="p">(</span><span class="n">beats</span><span class="p">,</span>
                                                             <span class="n">x_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                                                             <span class="n">x_max</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
                                     <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">Csync</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="mi">12</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow" title="View documentation for librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">Csync</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="mi">12</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span>
                          <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;cqt_hz&#39;</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span>
                          <span class="n">x_coords</span><span class="o">=</span><span class="n">beat_times</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<a href="http://matplotlib.org/api/tight_layout_api.html#matplotlib.tight_layout" title="View documentation for matplotlib.pyplot.tight_layout"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span></a><span class="p">()</span>
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_segmentation_002.png" class="align-center" src="../_images/sphx_glr_plot_segmentation_002.png" />
-<p>Let&#8217;s build a weighted recurrence matrix using beat-synchronous CQT
+<p>Let’s build a weighted recurrence matrix using beat-synchronous CQT
 (Equation 1)
 width=3 prevents links within the same bar
-mode=&#8217;affinity&#8217; here implements S_rep (after Eq. 8)</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.segment.recurrence_matrix.html#librosa.segment.recurrence_matrix"><span class="n">librosa</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">recurrence_matrix</span></a><span class="p">(</span><span class="n">Csync</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;affinity&#39;</span><span class="p">,</span>
+mode=’affinity’ here implements S_rep (after Eq. 8)</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.segment.recurrence_matrix.html#librosa.segment.recurrence_matrix" title="View documentation for librosa.segment.recurrence_matrix"><span class="n">librosa</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">recurrence_matrix</span></a><span class="p">(</span><span class="n">Csync</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;affinity&#39;</span><span class="p">,</span>
                                       <span class="n">sym</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="c1"># Enhance diagonals with a median filter (Equation 2)</span>
-<span class="n">df</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.segment.timelag_filter.html#librosa.segment.timelag_filter"><span class="n">librosa</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">timelag_filter</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.median_filter.html#scipy.ndimage.median_filter"><span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">median_filter</span></a><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.segment.timelag_filter.html#librosa.segment.timelag_filter" title="View documentation for librosa.segment.timelag_filter"><span class="n">librosa</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">timelag_filter</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.median_filter.html#scipy.ndimage.median_filter" title="View documentation for scipy.ndimage.median_filter"><span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">median_filter</span></a><span class="p">)</span>
 <span class="n">Rf</span> <span class="o">=</span> <span class="n">df</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Now let&#8217;s build the sequence matrix (S_loc) using mfcc-similarity</p>
+<p>Now let’s build the sequence matrix (S_loc) using mfcc-similarity</p>
 <blockquote>
 <div><span class="math">\(R_\text{path}[i, i\pm 1] = \exp(-\|C_i - C_{i\pm 1}\|^2 / \sigma^2)\)</span></div></blockquote>
 <p>Here, we take <span class="math">\(\sigma\)</span> to be the median distance between successive beats.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mfcc</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.feature.mfcc.html#librosa.feature.mfcc"><span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">mfcc</span></a><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
-<span class="n">Msync</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.util.sync.html#librosa.util.sync"><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">sync</span></a><span class="p">(</span><span class="n">mfcc</span><span class="p">,</span> <span class="n">beats</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mfcc</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.feature.mfcc.html#librosa.feature.mfcc" title="View documentation for librosa.feature.mfcc"><span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">mfcc</span></a><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
+<span class="n">Msync</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.util.sync.html#librosa.util.sync" title="View documentation for librosa.util.sync"><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">sync</span></a><span class="p">(</span><span class="n">mfcc</span><span class="p">,</span> <span class="n">beats</span><span class="p">)</span>
 
-<span class="n">path_distance</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.sum.html#numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.diff.html#numpy.diff"><span class="n">np</span><span class="o">.</span><span class="n">diff</span></a><span class="p">(</span><span class="n">Msync</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">sigma</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html#numpy.median"><span class="n">np</span><span class="o">.</span><span class="n">median</span></a><span class="p">(</span><span class="n">path_distance</span><span class="p">)</span>
-<span class="n">path_sim</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.exp.html#numpy.exp"><span class="n">np</span><span class="o">.</span><span class="n">exp</span></a><span class="p">(</span><span class="o">-</span><span class="n">path_distance</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">)</span>
+<span class="n">path_distance</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.sum.html#numpy.sum" title="View documentation for numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.diff.html#numpy.diff" title="View documentation for numpy.diff"><span class="n">np</span><span class="o">.</span><span class="n">diff</span></a><span class="p">(</span><span class="n">Msync</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">sigma</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html#numpy.median" title="View documentation for numpy.median"><span class="n">np</span><span class="o">.</span><span class="n">median</span></a><span class="p">(</span><span class="n">path_distance</span><span class="p">)</span>
+<span class="n">path_sim</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.exp.html#numpy.exp" title="View documentation for numpy.exp"><span class="n">np</span><span class="o">.</span><span class="n">exp</span></a><span class="p">(</span><span class="o">-</span><span class="n">path_distance</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">)</span>
 
-<span class="n">R_path</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.diag.html#numpy.diag"><span class="n">np</span><span class="o">.</span><span class="n">diag</span></a><span class="p">(</span><span class="n">path_sim</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.diag.html#numpy.diag"><span class="n">np</span><span class="o">.</span><span class="n">diag</span></a><span class="p">(</span><span class="n">path_sim</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">R_path</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.diag.html#numpy.diag" title="View documentation for numpy.diag"><span class="n">np</span><span class="o">.</span><span class="n">diag</span></a><span class="p">(</span><span class="n">path_sim</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.diag.html#numpy.diag" title="View documentation for numpy.diag"><span class="n">np</span><span class="o">.</span><span class="n">diag</span></a><span class="p">(</span><span class="n">path_sim</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>And compute the balanced combination (Equations 6, 7, 9)</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">deg_path</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.sum.html#numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">R_path</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">deg_rec</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.sum.html#numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">deg_path</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.sum.html#numpy.sum" title="View documentation for numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">R_path</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">deg_rec</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.sum.html#numpy.sum" title="View documentation for numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">mu</span> <span class="o">=</span> <span class="n">deg_path</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">deg_path</span> <span class="o">+</span> <span class="n">deg_rec</span><span class="p">)</span> <span class="o">/</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.sum.html#numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">((</span><span class="n">deg_path</span> <span class="o">+</span> <span class="n">deg_rec</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">deg_path</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">deg_path</span> <span class="o">+</span> <span class="n">deg_rec</span><span class="p">)</span> <span class="o">/</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.sum.html#numpy.sum" title="View documentation for numpy.sum"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">((</span><span class="n">deg_path</span> <span class="o">+</span> <span class="n">deg_rec</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="n">A</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">Rf</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">*</span> <span class="n">R_path</span>
 </pre></div>
 </div>
 <p>Plot the resulting graphs (Figure 1, left and center)</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow" title="View documentation for librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span>
                          <span class="n">y_coords</span><span class="o">=</span><span class="n">beat_times</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Recurrence similarity&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">R_path</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Path similarity&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Combined graph&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Recurrence similarity&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow" title="View documentation for librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">R_path</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Path similarity&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow" title="View documentation for librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Combined graph&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/tight_layout_api.html#matplotlib.tight_layout" title="View documentation for matplotlib.pyplot.tight_layout"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span></a><span class="p">()</span>
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_segmentation_003.png" class="align-center" src="../_images/sphx_glr_plot_segmentation_003.png" />
-<p>Now let&#8217;s compute the normalized Laplacian (Eq. 10)</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csgraph</span><span class="o">.</span><span class="n">laplacian</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<p>Now let’s compute the normalized Laplacian (Eq. 10)</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.laplacian.html#scipy.sparse.csgraph.laplacian" title="View documentation for scipy.sparse.csgraph.laplacian"><span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csgraph</span><span class="o">.</span><span class="n">laplacian</span></a><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 
 <span class="c1"># and its spectral decomposition</span>
-<span class="n">evals</span><span class="p">,</span> <span class="n">evecs</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.eigh.html#scipy.linalg.eigh"><span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span></a><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="n">evals</span><span class="p">,</span> <span class="n">evecs</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.eigh.html#scipy.linalg.eigh" title="View documentation for scipy.linalg.eigh"><span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span></a><span class="p">(</span><span class="n">L</span><span class="p">)</span>
 
 
 <span class="c1"># We can clean this up further with a median filter.</span>
 <span class="c1"># This can help smooth over small discontinuities</span>
-<span class="n">evecs</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.median_filter.html#scipy.ndimage.median_filter"><span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">median_filter</span></a><span class="p">(</span><span class="n">evecs</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">evecs</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.median_filter.html#scipy.ndimage.median_filter" title="View documentation for scipy.ndimage.median_filter"><span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">median_filter</span></a><span class="p">(</span><span class="n">evecs</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
 
 <span class="c1"># cumulative normalization is needed for symmetric normalize laplacian eigenvectors</span>
-<span class="n">Cnorm</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.cumsum.html#numpy.cumsum"><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span></a><span class="p">(</span><span class="n">evecs</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+<span class="n">Cnorm</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.cumsum.html#numpy.cumsum" title="View documentation for numpy.cumsum"><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span></a><span class="p">(</span><span class="n">evecs</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
 
 <span class="c1"># If we want k clusters, use the first k normalized eigenvectors.</span>
 <span class="c1"># Fun exercise: see how the segmentation changes as you vary k</span>
@@ -295,21 +323,21 @@ mode=&#8217;affinity&#8217; here implements S_rep (after Eq. 8)</p>
 
 <span class="c1"># Plot the resulting representation (Figure 1, center and right)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Recurrence matrix&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow" title="View documentation for librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Recurrence matrix&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow" title="View documentation for librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span>
                          <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span>
                          <span class="n">y_coords</span><span class="o">=</span><span class="n">beat_times</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Structure components&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Structure components&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/tight_layout_api.html#matplotlib.tight_layout" title="View documentation for matplotlib.pyplot.tight_layout"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span></a><span class="p">()</span>
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_segmentation_004.png" class="align-center" src="../_images/sphx_glr_plot_segmentation_004.png" />
-<p>Let&#8217;s use these k components to cluster beats into segments
+<p>Let’s use these k components to cluster beats into segments
 (Algorithm 1)</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">KM</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
 
@@ -317,30 +345,30 @@ mode=&#8217;affinity&#8217; here implements S_rep (after Eq. 8)</p>
 
 
 <span class="c1"># and plot the results</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;Paired&#39;</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Recurrence matrix&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow" title="View documentation for librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno_r&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Recurrence matrix&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow" title="View documentation for librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span>
                          <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span>
                          <span class="n">y_coords</span><span class="o">=</span><span class="n">beat_times</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Structure components&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.atleast_2d.html#numpy.atleast_2d"><span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span></a><span class="p">(</span><span class="n">seg_ids</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Estimated segments&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ticks</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Structure components&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow" title="View documentation for librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.atleast_2d.html#numpy.atleast_2d" title="View documentation for numpy.atleast_2d"><span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span></a><span class="p">(</span><span class="n">seg_ids</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Estimated segments&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/colorbar_api.html#matplotlib.colorbar" title="View documentation for matplotlib.pyplot.colorbar"><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span></a><span class="p">(</span><span class="n">ticks</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+<a href="http://matplotlib.org/api/tight_layout_api.html#matplotlib.tight_layout" title="View documentation for matplotlib.pyplot.tight_layout"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span></a><span class="p">()</span>
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_segmentation_005.png" class="align-center" src="../_images/sphx_glr_plot_segmentation_005.png" />
 <p>Locate segment boundaries from the label sequence</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">bound_beats</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.flatnonzero.html#numpy.flatnonzero"><span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span></a><span class="p">(</span><span class="n">seg_ids</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">seg_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">bound_beats</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.flatnonzero.html#numpy.flatnonzero" title="View documentation for numpy.flatnonzero"><span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span></a><span class="p">(</span><span class="n">seg_ids</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">seg_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 
 <span class="c1"># Count beat 0 as a boundary</span>
-<span class="n">bound_beats</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.util.fix_frames.html#librosa.util.fix_frames"><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">fix_frames</span></a><span class="p">(</span><span class="n">bound_beats</span><span class="p">,</span> <span class="n">x_min</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">bound_beats</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.util.fix_frames.html#librosa.util.fix_frames" title="View documentation for librosa.util.fix_frames"><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">fix_frames</span></a><span class="p">(</span><span class="n">bound_beats</span><span class="p">,</span> <span class="n">x_min</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Compute the segment label for each boundary</span>
 <span class="n">bound_segs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">seg_ids</span><span class="p">[</span><span class="n">bound_beats</span><span class="p">])</span>
@@ -349,7 +377,7 @@ mode=&#8217;affinity&#8217; here implements S_rep (after Eq. 8)</p>
 <span class="n">bound_frames</span> <span class="o">=</span> <span class="n">beats</span><span class="p">[</span><span class="n">bound_beats</span><span class="p">]</span>
 
 <span class="c1"># Make sure we cover to the end of the track</span>
-<span class="n">bound_frames</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.util.fix_frames.html#librosa.util.fix_frames"><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">fix_frames</span></a><span class="p">(</span><span class="n">bound_frames</span><span class="p">,</span>
+<span class="n">bound_frames</span> <span class="o">=</span> <a href="http://librosa.github.io/librosa/generated/librosa.util.fix_frames.html#librosa.util.fix_frames" title="View documentation for librosa.util.fix_frames"><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">fix_frames</span></a><span class="p">(</span><span class="n">bound_frames</span><span class="p">,</span>
                                        <span class="n">x_min</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                                        <span class="n">x_max</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -358,40 +386,44 @@ mode=&#8217;affinity&#8217; here implements S_rep (after Eq. 8)</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 5</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="kn">as</span> <span class="nn">patches</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure" title="View documentation for matplotlib.pyplot.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 
 <span class="n">bound_times</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">frames_to_time</span><span class="p">(</span><span class="n">bound_frames</span><span class="p">)</span>
 <span class="n">freqs</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">cqt_frequencies</span><span class="p">(</span><span class="n">n_bins</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                 <span class="n">fmin</span><span class="o">=</span><span class="n">librosa</span><span class="o">.</span><span class="n">note_to_hz</span><span class="p">(</span><span class="s1">&#39;C1&#39;</span><span class="p">),</span>
                                 <span class="n">bins_per_octave</span><span class="o">=</span><span class="n">BINS_PER_OCTAVE</span><span class="p">)</span>
 
-<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;cqt_hz&#39;</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
+<a href="http://librosa.github.io/librosa/generated/librosa.display.specshow.html#librosa.display.specshow" title="View documentation for librosa.display.specshow"><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span></a><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;cqt_hz&#39;</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
                          <span class="n">bins_per_octave</span><span class="o">=</span><span class="n">BINS_PER_OCTAVE</span><span class="p">,</span>
                          <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gca" title="View documentation for matplotlib.pyplot.gca"><span class="n">plt</span><span class="o">.</span><span class="n">gca</span></a><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">interval</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">bound_times</span><span class="p">,</span> <span class="n">bound_times</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span> <span class="n">bound_segs</span><span class="p">):</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="n">interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">freqs</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><a href="http://matplotlib.org/api/patches_api.html#matplotlib.patches.Rectangle" title="View documentation for matplotlib.patches.Rectangle"><span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span></a><span class="p">((</span><span class="n">interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">freqs</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
                                    <span class="n">interval</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                    <span class="n">freqs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
                                    <span class="n">facecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">(</span><span class="n">label</span><span class="p">),</span>
                                    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.50</span><span class="p">))</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a href="http://matplotlib.org/api/tight_layout_api.html#matplotlib.tight_layout" title="View documentation for matplotlib.pyplot.tight_layout"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span></a><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_segmentation_006.png" class="align-center" src="../_images/sphx_glr_plot_segmentation_006.png" />
-<p><strong>Total running time of the script:</strong>
-(0 minutes 8.581 seconds)</p>
-<div class="sphx-glr-download container">
-<strong>Download Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_segmentation.py" download=""><code class="xref download docutils literal"><span class="pre">plot_segmentation.py</span></code></a></div>
-<div class="sphx-glr-download container">
-<strong>Download IPython notebook:</strong> <a class="reference download internal" href="../_downloads/plot_segmentation.ipynb" download=""><code class="xref download docutils literal"><span class="pre">plot_segmentation.ipynb</span></code></a></div>
-<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.org">Generated by Sphinx-Gallery</a></p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  9.032 seconds)</p>
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" href="../_downloads/plot_segmentation.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_segmentation.py</span></code></a></div>
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" href="../_downloads/plot_segmentation.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_segmentation.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
 
+           </div>
+           <div class="articleComments">
+            
            </div>
           </div>
           <footer>
@@ -399,7 +431,7 @@ mode=&#8217;affinity&#8217; here implements S_rep (after Eq. 8)</p>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="plot_chroma.html" class="btn btn-neutral" title="Enhanced chroma" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="plot_chroma.html" class="btn btn-neutral" title="Enhanced chroma" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -433,13 +465,14 @@ mode=&#8217;affinity&#8217; here implements S_rep (after Eq. 8)</p>
             VERSION:'0.1.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
